@@ -1,61 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IDW S.A - Inicio</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <title>IDW Cumples 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka One', cursive;
+      background-image: url('fondo-infantil.jpg'); /* Asegurate de que esté en la misma carpeta */
+      background-size: cover;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      background-color: rgba(255, 223, 186, 0.9);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      color: #FF69B4;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: #FF6347;
+      font-size: 1.2em;
+    }
+
+    main {
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 30px auto;
+      max-width: 800px;
+      border-radius: 20px;
+    }
+
+    h2 {
+      color: #4B0082;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: rgba(255, 223, 186, 0.8);
+      font-size: 0.9em;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>IDW S.A</h1>
+    <h1>IDW Cumples 🎉</h1>
     <nav>
-      <ul>
-        <li><a href="#portada">Inicio</a></li>
-        <li><a href="#institucional">Información Institucional</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
+      <a href="index.html">Inicio</a>
+      <a href="institucional.html">Institucional</a>
+      <a href="contacto.html">Contacto</a>
     </nav>
   </header>
 
   <main>
-    <section id="portada" class="portada">
-      <div class="portada-contenido">
-        <h2>¡Hacemos tus cumpleaños inolvidables!</h2>
-        <p>Descubrí nuestros salones, servicios y creá el mejor festejo para los más pequeños.</p>
-        <a href="#institucional" class="btn">Conocé más</a>
-      </div>
-    </section>
-
-    <section id="institucional">
-      <h2>Información Institucional</h2>
-      <p>
-        IDW S.A. es una empresa dedicada a ofrecer experiencias únicas en cumpleaños infantiles. 
-        Contamos con salones temáticos, animaciones, catering y todos los servicios necesarios para que cada festejo sea inolvidable.
-      </p>
-    </section>
-
-    <section id="contacto">
-      <h2>Contacto</h2>
-      <form>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
+    <h2>¡Tu fiesta soñada empieza acá!</h2>
+    <p>Explorá nuestros salones y servicios para cumpleaños infantiles únicos y divertidos.</p>
+    <img src="imagen-fiesta.jpg" alt="Fiesta infantil feliz">
   </main>
 
   <footer>
-    <p>&copy; 2025 IDW S.A - Todos los derechos reservados.</p>
+    © 2025 IDW S.A.
   </footer>
 
-  <script src="js/main.js"></script>
 </body>
 </html>
