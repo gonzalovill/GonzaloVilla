@@ -75,16 +75,15 @@ form button {
   font-weight: bold;
   cursor: pointer;
 }
+
+form button:hover {
+  background-color: #ff3385;
+}
 form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-
-form button:hover {
-  background-color: #ff3385;
-}
-
 .informacion-contacto ul {
   list-style: none;
   padding: 0;
