@@ -2,12 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Contacto - IDW Cumples</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - IDW S.A</title>
+  <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
   <header>
-    <h1>IDW Cumples 🎉</h1>
+    <h1>Contacto</h1>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="institucional.html">Institucional</a>
@@ -15,30 +16,38 @@
     </nav>
   </header>
 
-  <main>
-    <h2>Contacto</h2>
-    <p>¿Querés reservar? ¡Escribinos o llamanos!</p>
-    <ul>
-      <li>Email: contacto@idw-cumples.com</li>
-      <li>Teléfono: +54 9 11 1234 5678</li>
-    </ul>
+  <main class="contacto-contenido">
+    <section class="formulario-contacto">
+      <h2>Dejanos tu mensaje</h2>
+      <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-    <form>
-      <label>Nombre:</label>
-      <input type="text" placeholder="Tu nombre" required>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
 
-      <label>Email:</label>
-      <input type="email" placeholder="tu@email.com" required>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
 
-      <label>Mensaje:</label>
-      <textarea placeholder="Contanos sobre la fiesta que querés organizar..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
 
-      <button type="submit">Enviar</button>
-    </form>
+    <section class="informacion-contacto">
+      <h2>Contacto</h2>
+      <p><strong>Dirección:</strong> Calle Ficticia 123, Ciudad, País</p>
+      <p><strong>Redes sociales:</strong></p>
+      <ul>
+        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+      </ul>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 IDW S.A.</p>
+    <p>&copy; 2025 IDW S.A - Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
+
