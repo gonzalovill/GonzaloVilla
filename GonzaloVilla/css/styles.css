@@ -138,10 +138,10 @@ footer {
   transform: scale(1.03);
 }
 .img-principal {
-  height: 500px;              /* o la altura que prefieras */
+  height: 500px;              
   width: 100%;
-  object-fit: cover;          /* recorta sin deformar */
-  object-position: center 70%; /* enfoca la parte de abajo */
+  object-fit: cover;         
+  object-position: center 70%; 
   border-radius: 15px;
   margin-top: 20px;
 }
