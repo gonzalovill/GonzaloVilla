@@ -105,3 +105,43 @@ footer {
   padding: 1rem;
   width: 100%;
 }
+}
+/* Galería de salones */
+.galeria-salones {
+  padding: 2rem;
+  background-color: #fff0f5;
+}
+
+.galeria-salon {
+  margin-bottom: 3rem;
+}
+
+.fotos-salon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.fotos-salon img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.fotos-salon img:hover {
+  transform: scale(1.03);
+}
+.img-principal {
+  height: 500px;              /* o la altura que prefieras */
+  width: 100%;
+  object-fit: cover;          /* recorta sin deformar */
+  object-position: center 70%; /* enfoca la parte de abajo */
+  border-radius: 15px;
+  margin-top: 20px;
+}
