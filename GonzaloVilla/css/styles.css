@@ -1,6 +1,6 @@
 /* --- Estilos generales (compartidos) --- */
 body {
-  background-color: #ffe6f0;
+  background-color: #ee6ea1;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   color: #444;
   margin: 0;
@@ -26,7 +26,7 @@ nav {
 nav a {
   margin: 0 1rem;
   text-decoration: none;
-  color: white;
+  color: #ff3385;
   font-weight: bold;
 }
 
@@ -105,7 +105,7 @@ footer {
   padding: 1rem;
   width: 100%;
 }
-}
+
 /* Galería de salones */
 .galeria-salones {
   padding: 2rem;
@@ -144,4 +144,43 @@ footer {
   object-position: center 70%; 
   border-radius: 15px;
   margin-top: 20px;
+}
+/* Estilos para la página "Nosotros" */
+.nosotros-contenido {
+  padding: 2rem;
+  background-color: #fff5e1;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #333;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.descripcion-nosotros h2,
+.mision-vision h2 {
+  color: #ff6f61;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px #ffe;
+}
+
+.descripcion-nosotros p,
+.mision-vision p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.descripcion-nosotros {
+  background-color: #ffe9b0;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.mision-vision {
+  background-color: #d4f4ff;
+  padding: 1.5rem;
+  border-radius: 1rem;
 }
