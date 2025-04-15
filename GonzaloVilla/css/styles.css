@@ -106,6 +106,14 @@ footer {
   width: 100%;
 }
 
+textarea {
+  resize: none;
+  width: 100%;     
+  max-width: 500px; 
+  height: 150px;    
+}
+
+
 /* Galería de salones */
 .galeria-salones {
   padding: 2rem;
