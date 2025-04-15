@@ -162,7 +162,7 @@ footer {
   color: #ff6f61;
   font-size: 2rem;
   margin-bottom: 1rem;
-  text-shadow: 1px 1px #ffe;
+  text-shadow:1px 1px rgb(235, 235, 167);
 }
 
 .descripcion-nosotros p,
@@ -180,7 +180,7 @@ footer {
 }
 
 .mision-vision {
-  background-color: #d4f4ff;
+  background-color: #aadef0;
   padding: 1.5rem;
   border-radius: 1rem;
 }
