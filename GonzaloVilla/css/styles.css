@@ -1,22 +1,22 @@
 /* --- Estilos generales (compartidos) --- */
 body {
-  background-color: #ee6ea1;
+  background-color: #51bf0;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: #444;
+  color: #030303;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background-color: #ffb3d9;
-  padding: 1rem;
+  background-color: rgba(245, 202, 139, 0.89);
+      padding: 20px;
   text-align: center;
 }
 
 header h1 {
   margin: 0;
   font-size: 2.5rem;
-  color: #fff;
+  color: #ffffff;
 }
 
 nav {
@@ -26,7 +26,7 @@ nav {
 nav a {
   margin: 0 1rem;
   text-decoration: none;
-  color: #ff3385;
+  color: rgba(49, 45, 45, 0.753);
   font-weight: bold;
 }
 
@@ -44,13 +44,13 @@ main {
 
 .formulario-contacto, .informacion-contacto {
   padding: 1.5rem;
-  background-color: #fff0f5;
+  background-color: #ffffff96;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .formulario-contacto h2, .informacion-contacto h2 {
-  color: #ff3385;
+  color: #0c0b09da;
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }
@@ -68,7 +68,7 @@ form input, form textarea {
 
 form button {
   padding: 0.5rem;
-  background-color: #ff66a3;
+  background-color:  #50c46d;
   color: white;
   border: none;
   border-radius: 5px;
@@ -77,7 +77,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #ff3385;
+  background-color: #c7a4a4;
 }
 form {
   display: flex;
@@ -90,7 +90,7 @@ form {
 }
 
 .informacion-contacto a {
-  color: #ff3385;
+  color: #15cce4;
   text-decoration: none;
 }
 
@@ -99,8 +99,8 @@ form {
 }
 
 footer {
-  background-color: #ffb3d9;
-  color: white;
+  background-color: #eedf5c88;
+  color:  rgba(29, 26, 27, 0.445);
   text-align: center;
   padding: 1rem;
   width: 100%;
@@ -109,7 +109,7 @@ footer {
 /* Galería de salones */
 .galeria-salones {
   padding: 2rem;
-  background-color: #fff0f5;
+  background-color: #51bef0;
 }
 
 .galeria-salon {
@@ -130,7 +130,7 @@ footer {
   height: auto;
   border-radius: 15px;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow:  0 4px 10px rgba(0, 0, 0, 0.747);
   transition: transform 0.3s ease;
 }
 
