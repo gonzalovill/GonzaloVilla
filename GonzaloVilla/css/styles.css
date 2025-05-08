@@ -7,22 +7,13 @@ body {
   padding: 0;
 }
 
-/* Estilos mínimos después de integrar Bootstrap 5 */
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Fredoka One', cursive;
-  background-image: url('../fondo-infantil.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #030303;
+/* Estilo solo para contacto */
+body.pagina-contacto {
+  background-color: white !important;
+  background-image: none !important;
+  color: #131212;
 }
 
-/* Opcional: personalizar tamaño del título en header */
-header h1 {
-  font-size: 2rem;
-}
 
 /* Galería de salones */
 .galeria-salones {
