@@ -14,6 +14,10 @@ body.pagina-contacto {
   color: #131212;
 }
 
+body.pagina-contacto {
+  font-family: 'Roboto', sans-serif;
+}
+
 
 /* Galería de salones */
 .galeria-salones {
