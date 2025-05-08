@@ -23,17 +23,18 @@ body.pagina-contacto main {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del header solo en contacto */
-body.pagina-contacto header {
-  background-color: #f6fafc !important; /* mismo color que el body */
+body.pagina-contacto header,
+body.pagina-contacto header a {
   color: #131212;
+}
+
+body.pagina-contacto header {
+  background-color: #f6fafc !important;
   padding: 1.5rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Enlaces del nav en el header */
 body.pagina-contacto header a {
-  color: #131212;
   text-decoration: none;
   margin: 0 10px;
 }
@@ -41,6 +42,10 @@ body.pagina-contacto header a {
 body.pagina-contacto header a:hover {
   text-decoration: underline;
 }
+textarea {
+  resize: none;
+}
+
 /* Galería de salones */
 .galeria-salones {
   padding: 2rem;
