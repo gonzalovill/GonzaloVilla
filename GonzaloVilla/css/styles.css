@@ -29,7 +29,7 @@ body.pagina-contacto header a {
 }
 
 body.pagina-contacto header {
-  background-color: rgba (245, 202, 139, 0.89) !important;
+  background-color: rgba(245, 202, 139, 0.89) !important;
   padding: 1.5rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
