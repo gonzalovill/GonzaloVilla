@@ -12,7 +12,7 @@ body.pagina-contacto {
   background-color: #51bef0 !important;
   background-image: none !important;
   color: #131212;
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* Estilo del contenido principal (main) en contacto */
@@ -105,7 +105,7 @@ textarea {
 .nosotros-contenido {
   padding: 2rem;
   background-color: #fff5e1;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #333;
   border-radius: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -144,7 +144,7 @@ textarea {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-image: url('fondo-infantil.jpg'); 
   background-size: cover;
   background-position: center;
