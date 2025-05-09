@@ -202,14 +202,4 @@ footer {
 }
 
 
-.bg-beige-personalizado {
-  background-color: #F5F5DC; /* Ejemplo: Beige claro */
-}
-
-/* Si quieres agregarle opacidad (como el amarillo original): */
-.bg-beige-opaco {
-  background-color: rgba(245, 245, 220, 0.85); /* Beige claro con 85% de opacidad */
-}
-
-
 
