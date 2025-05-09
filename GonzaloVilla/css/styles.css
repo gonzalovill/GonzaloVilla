@@ -7,21 +7,43 @@ body {
   padding: 0;
 }
 
-/* Estilos mínimos después de integrar Bootstrap 5 */
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Fredoka One', cursive;
-  background-image: url('../fondo-infantil.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #030303;
+/* Estilo solo para contacto */
+body.pagina-contacto {
+  background-color: #51bef0 !important;
+  background-image: none !important;
+  color: #131212;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Opcional: personalizar tamaño del título en header */
-header h1 {
-  font-size: 2rem;
+/* Estilo del contenido principal (main) en contacto */
+body.pagina-contacto main {
+  background-color: #fff5e1 !important; /* color crema claro */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body.pagina-contacto header,
+body.pagina-contacto header a {
+  color: #131212;
+}
+
+body.pagina-contacto header {
+  background-color: #f6fafc !important;
+  padding: 1.5rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+body.pagina-contacto header a {
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+body.pagina-contacto header a:hover {
+  text-decoration: underline;
+}
+textarea {
+  resize: none;
 }
 
 /* Galería de salones con cambios que integran Bootstrap*/
