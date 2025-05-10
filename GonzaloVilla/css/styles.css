@@ -8,24 +8,24 @@ body {
 }
 
 /* Estilo solo para contacto */
+/* Asegúrate de que la fuente esté cargada */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+/* Estilo para el título "Contactá con nosotros" con la misma tipografía de "IDW Cumples" */
+.titulo-contacto {
+  font-family: 'Fredoka One', cursive, sans-serif; /* Fuente que se usa en IDW Cumples */
+  color: #ffffff; /* Color blanco */
+  font-size: 3em; /* Tamaño similar al de "IDW Cumples" */
+  text-align: center; /* Centrado del texto */
+}
+
+/* Otros estilos para la página de contacto */
+
 body.pagina-contacto {
   background-color: #51bef0 !important;
   background-image: none !important;
   color: #131212;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-/* Estilo del contenido principal (main) en contacto */
-body.pagina-contacto main {
-  background-color: #fff5e1 !important; /* color crema claro */
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-body.pagina-contacto header,
-body.pagina-contacto header a {
-  color: #131212;
 }
 
 body.pagina-contacto header {
@@ -37,13 +37,19 @@ body.pagina-contacto header {
 body.pagina-contacto header a {
   text-decoration: none;
   margin: 0 10px;
+  color: #131212;
 }
 
 body.pagina-contacto header a:hover {
   text-decoration: underline;
 }
-textarea {
-  resize: none;
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color:  rgba(222, 238, 81, 0.562);
+  font-size: 0.9em;
+  color: #3333338a;
 }
 
 /* Galería de salones con cambios que integran Bootstrap*/
@@ -200,6 +206,28 @@ footer {
   font-size: 0.9em;
   color: #3333338a;
 }
+/* Fondo infantil general */
+body {
+  font-family: 'Fredoka One', cursive;
+  background-image: url('../img/fondo-infantil.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #333;
+}
 
+/* Caja principal semitransparente */
+.main-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 20px;
+}
 
+/* Color personalizado para navbar y footer */
+.bg-pastel {
+  background-color: rgba(255, 250, 186, 0.9);
+}
 
+/* Títulos principales */
+h1, h2 {
+  color: #FF69B4;
+}
