@@ -207,3 +207,109 @@ img {
   margin-top: 20px;
 }
 
+
+
+
+
+
+
+
+
+
+/* --- Estilos para administración de salones --- */
+
+
+.titulo.admin {
+  background-color: rgba(245, 202, 139, 0.89) !important; 
+  color: #000000;             
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(168, 141, 141, 0.2);
+}
+
+.admin-container {
+  background-color: rgba(250, 140, 140, 0.85);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.admin-container h2, .admin-container h3 {
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000;
+  font-size: 2em;
+  margin-bottom: 1rem;
+ 
+}
+
+/* Estilo para los campos del formulario */
+#salonForm .form-label {
+  font-family: 'Lato', sans-serif;
+  color: #333;
+}
+
+#salonForm .form-control {
+  border-radius: 10px;
+  border: 2px solid #51bef03b;
+;
+  padding: 0.5rem;
+}
+
+#salonForm .form-control:focus {
+  border-color: #51bef0;
+  box-shadow: 0 0 0 4px rgba(220, 231, 215, 0.308);
+}
+
+/* Botón guardar */
+#salonForm button[type="submit"] {
+  background-color: #96ee73;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#salonForm button[type="submit"]:hover {
+  background-color: #f5debd;
+}
+
+/* Lista de salones */
+#listaSalones {
+  margin-top: 2rem;
+}
+
+#listaSalones .list-group-item {
+  background-color: #bfecce;
+  border-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1rem;
+  color: #333;
+}
+
+#listaSalones .btn-warning,
+#listaSalones .btn-danger {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+#listaSalones .btn-warning {
+  background-color: #4ccfcf;
+  border: none;
+  color: #ffffff;
+}
+
+#listaSalones .btn-danger {
+  background-color: #b82525;
+  border: none;
+}
