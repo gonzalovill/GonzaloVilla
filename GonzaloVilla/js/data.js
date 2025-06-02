@@ -49,8 +49,8 @@ export const salonesIniciales = [
   }
 ];
  export function inicializarSalones() {
-  const yaHaySalones = localStorage.getItem("salones");
-  if (!yaHaySalones) {
+  const  salonesGuardados= localStorage.getItem("salones");
+  if (!salonesGuardados) {
     localStorage.setItem("salones", JSON.stringify(salonesIniciales));
   }
 }

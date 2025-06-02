@@ -14,31 +14,39 @@
   <h3>Agregar nuevo salón</h3>
   <form id="formSalon">
     <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre</label>
+      <label for="nombre" class="form-label"><strong>Nombre</strong></label>
       <input type="text" class="form-control" id="nombre" required>
+      <small class="form-text text-muted">Ejemplo: RECREO</small>
     </div>
     <div class="mb-3">
-      <label for="direccion" class="form-label">Dirección</label>
+      <label for="direccion" class="form-label"><strong>Dirección</strong></label>
       <input type="text" class="form-control" id="direccion" required>
+      <small class="form-text text-muted">Ejemplo: Champagnat 1090</small>
     </div>
     <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripción</label>
+      <label for="descripcion" class="form-label"><strong>Descripción</strong></label>
       <textarea class="form-control" id="descripcion" rows="2" required></textarea>
+        <small class="form-text text-muted">Ejemplo: Diversión asegurada bajo techo. Recreo ofrece un gran pelotero, inflables y juegos para todas las edades en un ambiente cerrado y cómodo.</small>
     </div>
 
     <div class="mb-3">
-      <label>Imagen 1</label>
-      <input type="text" id="imagen1" class="form-control mb-2" placeholder="URL de imagen 1">
+  <label>Imagen 1</label>
+  <input type="text" id="imagen1" class="form-control mb-2" placeholder="URL de imagen 1">
+  <small class="text-muted d-block">Ejemplo: img/salones/salon 4/s4foto1.jpeg</small>
 
-      <label>Imagen 2</label>
-      <input type="text" id="imagen2" class="form-control mb-2" placeholder="URL de imagen 2">
+  <label>Imagen 2</label>
+  <input type="text" id="imagen2" class="form-control mb-2" placeholder="URL de imagen 2">
+  <small class="text-muted d-block">Ejemplo: img/salones/salon 4/s4foto2.jpeg</small>
 
-      <label>Imagen 3</label>
-      <input type="text" id="imagen3" class="form-control mb-2" placeholder="URL de imagen 3">
+  <label>Imagen 3</label>
+  <input type="text" id="imagen3" class="form-control mb-2" placeholder="URL de imagen 3">
+  <small class="text-muted d-block">Ejemplo: img/salones/salon 4/s4foto3.jpeg</small>
 
-      <label>Imagen 4</label>
-      <input type="text" id="imagen4" class="form-control mb-2" placeholder="URL de imagen 4">
-    </div>
+  <label>Imagen 4</label>
+  <input type="text" id="imagen4" class="form-control mb-2" placeholder="URL de imagen 4">
+  <small class="text-muted d-block">Ejemplo: img/salones/salon 4/s4foto4.jpeg</small>
+</div>
+
     <button type="submit" class="btn btn-primary">Agregar salón</button>
     <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
   </form>
