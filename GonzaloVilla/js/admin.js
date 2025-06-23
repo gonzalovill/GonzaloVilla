@@ -1,8 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (!sessionStorage.getItem("accessToken")) {
-    window.location.href = "login.html";
+  const token = sessionStorage.getItem("accessToken");
+
+
+  if (!token || !usuario) {
+    window.location.href = "../login.html";
+    return;
   }
+
+  const usuario = JSON.parse(sessionStorage.getItem("usuarioLogueado"));
+
+  if (usuario.role !== "admin") {
+    alert("Solo administradores pueden acceder al panel.");
+    window.location.href = "../catalogo.html";
+  }
+  
+  console.log("Usuario admin validado:", usuario);
+
 });
+
+
 
 import { inicializarSalones } from './data.js';
 import { eliminarSalon, editarSalon } from './acciones.js';
