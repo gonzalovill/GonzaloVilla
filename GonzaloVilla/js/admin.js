@@ -1,8 +1,13 @@
+document.addEventListener("DOMContentLoaded", () => {
+  if (!sessionStorage.getItem("accessToken")) {
+    window.location.href = "login.html";
+  }
+});
+
 import { inicializarSalones } from './data.js';
 import { eliminarSalon, editarSalon } from './acciones.js';
 
 inicializarSalones();
-
 let salones = JSON.parse(localStorage.getItem('salones')) || [];
 
 const form = document.getElementById('formSalon');
@@ -24,6 +29,11 @@ form.addEventListener("submit", (event) => {
     ].filter(url => url.trim() !== "")
   };
 
+  if (!nuevoSalon.nombre || !nuevoSalon.direccion || !nuevoSalon.descripcion) {
+    alert("Por favor completá todos los campos obligatorios.");
+    return;
+  }
+
   salones.push(nuevoSalon);
   guardarEnLocalStorage(salones);
   renderTabla();
@@ -43,7 +53,7 @@ function renderTabla(data = salones) {
       <td>${salon.nombre}</td>
       <td>${salon.direccion}</td>
       <td>${salon.descripcion}</td>
-      <td>${salon.imagenes.map(img => `<img src="${img}" style="width: 50px; margin-right: 5px;">`).join("")}</td>
+      <td>${salon.imagenes.map(img => `<img src="../${img}" style="width: 50px; margin-right: 5px;">`).join("")}</td>
       <td>
         <button class="btn btn-warning btn-sm me-2" onclick="editarSalonAccion(${salon.id})">Editar</button>
         <button class="btn btn-danger btn-sm" onclick="eliminarSalonAccion(${salon.id})">Eliminar</button>
@@ -52,9 +62,12 @@ function renderTabla(data = salones) {
     tabla.appendChild(fila);
   });
 }
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  sessionStorage.removeItem("accessToken");
+  window.location.href = "../login.html";
+});
 
 window.eliminarSalonAccion = (id) => eliminarSalon(id, salones, guardarEnLocalStorage, renderTabla);
 window.editarSalonAccion = (id) => editarSalon(id, salones, guardarEnLocalStorage, renderTabla);
 
 renderTabla();
-

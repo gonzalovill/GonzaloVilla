@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="es">
+  
 <head>
   <meta charset="UTF-8">
   <title>Administrar Salones</title>
@@ -8,6 +10,9 @@
 <body>
   <div class="container my-5">
     <h1 class="text-center mb-4">Administrar Salones</h1>
+<div class="d-flex justify-content-end p-3">
+  <button id="logoutBtn" class="btn btn-outline-danger">Cerrar sesión</button>
+</div>
 
 
 <div class="card p-4 mb-4">
@@ -15,17 +20,17 @@
   <form id="formSalon">
     <div class="mb-3">
       <label for="nombre" class="form-label"><strong>Nombre</strong></label>
-      <input type="text" class="form-control" id="nombre" required>
+      <input type="text" class="form-control" id="nombre">
       <small class="form-text text-muted">Ejemplo: RECREO</small>
     </div>
     <div class="mb-3">
       <label for="direccion" class="form-label"><strong>Dirección</strong></label>
-      <input type="text" class="form-control" id="direccion" required>
+      <input type="text" class="form-control" id="direccion" >
       <small class="form-text text-muted">Ejemplo: Champagnat 1090</small>
     </div>
     <div class="mb-3">
       <label for="descripcion" class="form-label"><strong>Descripción</strong></label>
-      <textarea class="form-control" id="descripcion" rows="2" required></textarea>
+      <textarea class="form-control" id="descripcion" rows="2"></textarea>
         <small class="form-text text-muted">Ejemplo: Diversión asegurada bajo techo. Recreo ofrece un gran pelotero, inflables y juegos para todas las edades en un ambiente cerrado y cómodo.</small>
     </div>
 
@@ -66,6 +71,7 @@
       <tbody id="tabla-salones"></tbody>
     </table>
   </div>
-  <script type="module" src="js/admin.js"></script>
+  <script type="module" src="../js/admin.js"></script>
+
 </body>
 </html>
