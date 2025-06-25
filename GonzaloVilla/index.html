@@ -55,24 +55,24 @@
       const nombreUsuario = document.getElementById("nombreUsuario");
 
      if (usuario) {
-      // Mostrar saludo y logout
+     
       nombreUsuario.textContent = `Hola, ${usuario.firstName || usuario.username}`;
       linkLogin.style.display = "none";
       btnLogout.style.display = "inline-block";
 
-      // Mostrar link de panel solo si es admin
+   
       if (usuario.role === "admin") {
         linkAdmin.style.display = "inline";
       }
     } else {
-      // No logueado
+      
       nombreUsuario.textContent = "";
       linkLogin.style.display = "inline-block";
       btnLogout.style.display = "none";
       linkAdmin.style.display = "none";
     }
 
-    // Cerrar sesión
+    
     btnLogout.addEventListener("click", () => {
       sessionStorage.clear();
       window.location.href = "login.html";

@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderizarServicios();
 });
 async function cargadeDatos() {
-  await cargarSiNoExiste("salones", "salones.json");
-  await cargarSiNoExiste("servicios", "servicios.json");
-  await cargarSiNoExiste("presupuestos", "presupuestos.json");
-  await cargarSiNoExiste("imagenes", "imagenes.json");
+  await cargardatosSinohay("salones", "salones.json");
+  await cargardatosSinohay("servicios", "servicios.json");
+  await cargardatosSinohay("presupuestos", "presupuestos.json");
+  await cargardatosSinohay("imagenes", "imagenes.json");
 
 }
 
-async function cargarSiNoExiste(clave, archivo) {
+async function cargardatosSinohay(clave, archivo) {
   if (!localStorage.getItem(clave)) {
     try {
       const res = await fetch(`../data/${archivo}`);
@@ -38,7 +38,7 @@ async function cargarSiNoExiste(clave, archivo) {
   }
 }
 
-function guardarEnLS(clave, datos) {
+function guardarEnLocalStorage(clave, datos) {
   localStorage.setItem(clave, JSON.stringify(datos));
 }
 
@@ -93,7 +93,7 @@ document.getElementById("formSalon").addEventListener("submit", function (e) {
   }
 
   salones.push(nuevo);
-  guardarEnLS("salones", salones);
+  guardarEnLocalStorage("salones", salones);
   renderizarSalones();
   this.reset();
 });
@@ -121,12 +121,18 @@ function renderizarServicios() {
   });
 }
 
-
 let editandoServicioId = null;
 
 document.getElementById("formServicio").addEventListener("submit", function (e) {
   e.preventDefault();
   const servicios = JSON.parse(localStorage.getItem("servicios")) || [];
+
+   const nuevo = {
+    id: editandoServicioId || Date.now(),
+    nombre: document.getElementById("nombreServicio").value.trim(),
+    descripcion: document.getElementById("descripcionServicio").value.trim(),
+    valor: parseFloat(document.getElementById("valorServicio").value)
+  };
 
   if (!nuevo.nombre || !nuevo.descripcion || isNaN(nuevo.valor)) {
     alert("Completá todos los campos.");
@@ -142,7 +148,7 @@ document.getElementById("formServicio").addEventListener("submit", function (e) 
     servicios.push(nuevo);
   }
 
-  guardarEnLS("servicios", servicios);
+  guardarEnLocalStorage("servicios", servicios);
   renderizarServicios();
   this.reset();
 });

@@ -1,4 +1,4 @@
-async function inicializarServicios() {
+async function cargarServicios() {
   if (!localStorage.getItem("servicios")) {
     try {
       const res = await fetch('data/servicios.json');
@@ -28,6 +28,6 @@ function mostrarServicios() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await inicializarServicios();
+  await cargarServicios();
   mostrarServicios();
 });
