@@ -87,3 +87,99 @@ window.eliminarSalonAccion = (id) => eliminarSalon(id, salones, guardarEnLocalSt
 window.editarSalonAccion = (id) => editarSalon(id, salones, guardarEnLocalStorage, renderTabla);
 
 renderTabla();
+
+let servicios = [];
+let editandoServicioId = null;
+
+
+async function cargarServicios() {
+  const guardados = localStorage.getItem('servicios');
+  if (guardados) {
+    servicios = JSON.parse(guardados);
+  } else {
+    const res = await fetch('../data/servicios.json');
+    servicios = await res.json();
+    localStorage.setItem('servicios', JSON.stringify(servicios));
+  }
+  renderizarServicios();
+}
+
+function guardarServicios() {
+  localStorage.setItem('servicios', JSON.stringify(servicios));
+}
+
+function renderizarServicios() {
+  const tbody = document.getElementById('tabla-servicios');
+  tbody.innerHTML = '';
+  servicios.forEach((servicio) => {
+    const estadoClass = servicio.estado === 'activo' ? 'text-success' : 'text-danger';
+    tbody.innerHTML += `
+      <tr>
+        <td>${servicio.nombre}</td>
+        <td>${servicio.descripcion}</td>
+        <td>${servicio.valor}</td>
+        <td class="${estadoClass}">${servicio.estado.charAt(0).toUpperCase() + servicio.estado.slice(1)}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editarServicio(${servicio.id})">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// Agrega o edita servicio
+document.getElementById('formServicio').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('nombreServicio').value;
+  const descripcion = document.getElementById('descripcionServicio').value;
+  const valor = document.getElementById('valorServicio').value;
+  const estado = document.getElementById('estadoServicio').value;
+
+  if (editandoServicioId) {
+    // Edita
+    const servicio = servicios.find(s => s.id === editandoServicioId);
+    servicio.nombre = nombre;
+    servicio.descripcion = descripcion;
+    servicio.valor = valor;
+    servicio.estado = estado;
+    editandoServicioId = null;
+    document.getElementById('btnServicio').textContent = "Agregar servicio";
+  } else {
+    // Agrega
+    const nuevoServicio = {
+      id: Date.now(),
+      nombre,
+      descripcion,
+      valor,
+      estado
+    };
+    servicios.push(nuevoServicio);
+  }
+  guardarServicios();
+  renderizarServicios();
+  this.reset();
+});
+
+// Elimina servicio
+window.eliminarServicio = function(id) {
+  if (confirm("¿Seguro que deseas eliminar este servicio?")) {
+    servicios = servicios.filter(s => s.id !== id);
+    guardarServicios();
+    renderizarServicios();
+  }
+};
+
+// Editar servicio
+window.editarServicio = function(id) {
+  const servicio = servicios.find(s => s.id === id);
+  if (!servicio) return;
+  document.getElementById('nombreServicio').value = servicio.nombre;
+  document.getElementById('descripcionServicio').value = servicio.descripcion;
+  document.getElementById('valorServicio').value = servicio.valor;
+  document.getElementById('estadoServicio').value = servicio.estado;
+  editandoServicioId = id;
+  document.getElementById('btnServicio').textContent = "Guardar cambios";
+};
+
+document.addEventListener('DOMContentLoaded', cargarServicios);

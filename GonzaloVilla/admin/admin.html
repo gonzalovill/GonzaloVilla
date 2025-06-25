@@ -53,11 +53,9 @@
 
     <button type="submit" class="btn btn-primary">Agregar salón</button>
     <a href="../index.html" class="btn btn-secondary">Volver al inicio</a>
-    <a href="usuarios.html" class="btn btn-outline-primary">Usuarios</button>
   </form>
 </div>
- 
-
+<a href="usuarios.html" class="btn btn-outline-primary mt-2">Usuarios</a>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -70,6 +68,48 @@
       </thead>
       <tbody id="tabla-salones"></tbody>
     </table>
+
+    <!-- Formulario para agregar/editar servicios -->
+<div class="card p-4 mb-4">
+  <h3>Administrar Servicios</h3>
+  <form id="formServicio">
+    <input type="hidden" id="idServicio">
+    <div class="mb-3">
+      <label for="nombreServicio" class="form-label"><strong>Nombre</strong></label>
+      <input type="text" class="form-control" id="nombreServicio" required>
+    </div>
+    <div class="mb-3">
+      <label for="descripcionServicio" class="form-label"><strong>Descripción</strong></label>
+      <textarea class="form-control" id="descripcionServicio" rows="2" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="valorServicio" class="form-label"><strong>Valor</strong></label>
+      <input type="number" class="form-control" id="valorServicio" required>
+    </div>
+    <div class="mb-3">
+      <label for="estadoServicio" class="form-label"><strong>Estado</strong></label>
+      <select class="form-control" id="estadoServicio" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" id="btnServicio">Agregar servicio</button>
+  </form>
+</div>
+
+<!-- Tabla de servicios -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Valor</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tabla-servicios"></tbody>
+</table>
   </div>
   <script type="module" src="../js/admin.js"></script>
 
