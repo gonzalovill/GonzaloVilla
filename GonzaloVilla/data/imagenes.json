@@ -1,0 +1,21 @@
+[
+  { "id": 1, "idSalon": 1, "rutaArchivo": "img/salones/salon1/s1foto1.jpeg" },
+  { "id": 2, "idSalon": 1, "rutaArchivo": "img/salones/salon1/s1foto2.jpeg" },
+  { "id": 3, "idSalon": 1, "rutaArchivo": "img/salones/salon1/s1foto3.jpeg" },
+  { "id": 4, "idSalon": 1, "rutaArchivo": "img/salones/salon1/s1foto4.jpeg" },
+
+  { "id": 5, "idSalon": 2, "rutaArchivo": "img/salones/salon2/s2foto1.jpeg" },
+  { "id": 6, "idSalon": 2, "rutaArchivo": "img/salones/salon2/s2foto2.jpeg" },
+  { "id": 7, "idSalon": 2, "rutaArchivo": "img/salones/salon2/s2foto3.jpeg" },
+  { "id": 8, "idSalon": 2, "rutaArchivo": "img/salones/salon2/s2foto4.jpeg" },
+
+  { "id": 9, "idSalon": 3, "rutaArchivo": "img/salones/salon3/s3foto1.jpeg" },
+  { "id": 10, "idSalon": 3, "rutaArchivo": "img/salones/salon3/s3foto2.jpeg" },
+  { "id": 11, "idSalon": 3, "rutaArchivo": "img/salones/salon3/s3foto3.jpeg" },
+  { "id": 12, "idSalon": 3, "rutaArchivo": "img/salones/salon3/s3foto4.jpeg" },
+
+  { "id": 13, "idSalon": 4, "rutaArchivo": "img/salones/salon4/s4foto1.jpeg" },
+  { "id": 14, "idSalon": 4, "rutaArchivo": "img/salones/salon4/s4foto2.jpeg" },
+  { "id": 15, "idSalon": 4, "rutaArchivo": "img/salones/salon4/s4foto3.jpeg" },
+  { "id": 16, "idSalon": 4, "rutaArchivo": "img/salones/salon4/s4foto4.jpeg" }
+]

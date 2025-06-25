@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "titulo": "WISHLAND",
+    "descripcion": "Un mundo de fantasía pensado para los más pequeños. Wishland ofrece un entorno seguro, colorido y acogedor donde los niños pueden jugar, explorar y divertirse.",
+    "direccion": "San Luis 1940",
+    "valor": 50000,
+    "estado": "Disponible"
+  },
+  {
+    "id": 2,
+    "titulo": "UPPA",
+    "descripcion": "Un salón moderno y tecnológico, ideal para los chicos más curiosos. Uppa ofrece juegos interactivos y pantallas digitales.",
+    "direccion": "Estrada 1315",
+    "valor": 60000,
+    "estado": "Disponible"
+  },
+  {
+    "id": 3,
+    "titulo": "CIUDAD MÁGICA",
+    "descripcion": "Salones temáticos para que los niños se sientan parte de su historia favorita mientras festejan.",
+    "direccion": "Belgrano 2110",
+    "valor": 55000,
+    "estado": "Disponible"
+  },
+  {
+    "id": 4,
+    "titulo": "RECREO",
+    "descripcion": "Gran pelotero, inflables y juegos bajo techo. Ideal para todas las edades.",
+    "direccion": "Champagnat 1090",
+    "valor": 52000,
+    "estado": "Disponible"
+  }
+]

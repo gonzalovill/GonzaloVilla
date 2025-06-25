@@ -1,30 +1,52 @@
-import { inicializarSalones } from './data.js';
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const [salonesRes, imagenesRes] = await Promise.all([
+      fetch("data/salones.json"),
+      fetch("data/imagenes.json")
+    ]);
 
-inicializarSalones();
+    const salones = await salonesRes.json();
+    const imagenes = await imagenesRes.json();
 
-const contenedor = document.getElementById("contenedor-catalogo");
-const salones = JSON.parse(localStorage.getItem("salones")) || [];
+ 
+    localStorage.setItem("salones", JSON.stringify(salones));
+    localStorage.setItem("imagenes", JSON.stringify(imagenes));
 
-if (!salones.length) {
-  contenedor.innerHTML = "<p>No hay salones cargados.</p>";
-} else {
-  salones.forEach((salon) => {
-    const card = document.createElement("div");
-    card.className = "card mb-4";
+   
+    renderizarSalones(salones, imagenes);
+  } catch (error) {
+    console.error("Error al cargar los datos:", error);
+    document.getElementById("contenedor-catalogo").innerHTML = `<p class="text-danger">Error al cargar los salones.</p>`;
+  }
+});
 
-    card.innerHTML = `
-      <div class="card-body">
-        <h5 class="card-title">${salon.nombre}</h5>
-        <p class="card-text"><strong>📍</strong> ${salon.direccion}</p>
-        <p class="card-text">${salon.descripcion}</p>
-        <div class="d-flex flex-wrap">
-          ${salon.imagenes.map(img => `
-            <img src="${img}" class="img-fluid mb-3 img-salon" style="width: 250px; height: auto; margin: 5px; border-radius: 8px;">
-          `).join("")}
-        </div>
-      </div>
+function renderizarSalones(salones, imagenes) {
+  const contenedor = document.getElementById("contenedor-catalogo");
+  contenedor.innerHTML = "";
+
+  salones.forEach(salon => {
+    const imagenesSalon = imagenes.filter(img => img.idSalon === salon.id);
+
+    const estadoBadge = salon.estado === "Disponible"
+      ? `<span class="badge bg-success">Disponible</span>`
+      : `<span class="badge bg-danger">Reservado</span>`;
+
+    const imagenesHTML = imagenesSalon.length
+      ? imagenesSalon.map(img => `
+          <img src="${img.rutaArchivo}" alt="Imagen de ${salon.titulo}" style="width:100px; height:70px; object-fit:cover; border-radius:5px;">
+        `).join("")
+      : '<p class="text-muted">Sin imágenes disponibles</p>';
+
+    contenedor.innerHTML += `
+      <article class="card mb-4 p-3 shadow-sm">
+        <h3>${salon.titulo}</h3>
+        <p><strong>Dirección:</strong> ${salon.direccion}</p>
+        <p>${salon.descripcion}</p>
+        <p><strong>Valor:</strong> $${salon.valor}</p>
+        <p>${estadoBadge}</p>
+        <div class="d-flex flex-wrap gap-2">${imagenesHTML}</div>
+      </article>
     `;
-    contenedor.appendChild(card);
   });
 }
 

@@ -10,19 +10,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Data tiene un array 'users'
-    const usuarios = data.users;
-
-// Crear tabla para mostrar usuarios (sin datos sensibles)
+const usuarios = data.users;
 const tabla = document.createElement("table");
 
-// Clases Bootstrap
 tabla.className = "table table-bordered table-striped";
 tabla.style.width = "100%";
-
-// Encabezado
 const header = tabla.createTHead();
-header.className = "table-dark"; // fondo oscuro para el header
+header.className = "table-dark"; 
 const headerRow = header.insertRow();
 
 ["Nombre", "Usuario", "Email", "Rol"].forEach(texto => {
@@ -31,7 +25,6 @@ const headerRow = header.insertRow();
   headerRow.appendChild(th);
 });
 
-// Cuerpo de tabla
 const tbody = tabla.createTBody();
 
 usuarios.forEach(user => {
@@ -44,10 +37,9 @@ usuarios.forEach(user => {
   row.insertCell().textContent = user.role || "usuario";
 });
 
-// Insertar tabla en el contenedor
 const container = document.getElementById("usuarios-container");
-container.className = "table-responsive"; // por si no lo tenías
-container.innerHTML = ""; // limpiar antes de insertar
+container.className = "table-responsive"; 
+container.innerHTML = ""; 
 container.appendChild(tabla);
 
 

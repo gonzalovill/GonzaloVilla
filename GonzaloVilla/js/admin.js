@@ -1,185 +1,162 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { editarSalon, eliminarSalon, editarServicio, eliminarServicio } from './acciones.js';
+document.addEventListener("DOMContentLoaded", async () => {
   const token = sessionStorage.getItem("accessToken");
-
+  const usuario = JSON.parse(sessionStorage.getItem("usuarioLogueado"));
 
   if (!token || !usuario) {
     window.location.href = "../login.html";
     return;
   }
 
-  const usuario = JSON.parse(sessionStorage.getItem("usuarioLogueado"));
-
   if (usuario.role !== "admin") {
     alert("Solo administradores pueden acceder al panel.");
     window.location.href = "../catalogo.html";
-  }
-  
-  console.log("Usuario admin validado:", usuario);
-
-});
-
-
-
-import { inicializarSalones } from './data.js';
-import { eliminarSalon, editarSalon } from './acciones.js';
-
-inicializarSalones();
-let salones = JSON.parse(localStorage.getItem('salones')) || [];
-
-const form = document.getElementById('formSalon');
-const tabla = document.getElementById('tabla-salones');
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const nuevoSalon = {
-    id: Date.now(),
-    nombre: document.getElementById("nombre").value.trim(),
-    direccion: document.getElementById("direccion").value.trim(),
-    descripcion: document.getElementById("descripcion").value.trim(),
-    imagenes: [
-      document.getElementById("imagen1").value,
-      document.getElementById("imagen2").value,
-      document.getElementById("imagen3").value,
-      document.getElementById("imagen4").value
-    ].filter(url => url.trim() !== "")
-  };
-
-  if (!nuevoSalon.nombre || !nuevoSalon.direccion || !nuevoSalon.descripcion) {
-    alert("Por favor completá todos los campos obligatorios.");
     return;
   }
 
-  salones.push(nuevoSalon);
-  guardarEnLocalStorage(salones);
-  renderTabla();
-  form.reset();
-});
-
-function guardarEnLocalStorage(data) {
-  localStorage.setItem("salones", JSON.stringify(data));
-  salones = data;
-}
-
-function renderTabla(data = salones) {
-  tabla.innerHTML = "";
-  data.forEach((salon) => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${salon.nombre}</td>
-      <td>${salon.direccion}</td>
-      <td>${salon.descripcion}</td>
-      <td>${salon.imagenes.map(img => `<img src="../${img}" style="width: 50px; margin-right: 5px;">`).join("")}</td>
-      <td>
-        <button class="btn btn-warning btn-sm me-2" onclick="editarSalonAccion(${salon.id})">Editar</button>
-        <button class="btn btn-danger btn-sm" onclick="eliminarSalonAccion(${salon.id})">Eliminar</button>
-      </td>
-    `;
-    tabla.appendChild(fila);
-  });
-}
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  sessionStorage.removeItem("accessToken");
-  window.location.href = "../login.html";
-});
-
-window.eliminarSalonAccion = (id) => eliminarSalon(id, salones, guardarEnLocalStorage, renderTabla);
-window.editarSalonAccion = (id) => editarSalon(id, salones, guardarEnLocalStorage, renderTabla);
-
-renderTabla();
-
-let servicios = [];
-let editandoServicioId = null;
-
-
-async function cargarServicios() {
-  const guardados = localStorage.getItem('servicios');
-  if (guardados) {
-    servicios = JSON.parse(guardados);
-  } else {
-    const res = await fetch('../data/servicios.json');
-    servicios = await res.json();
-    localStorage.setItem('servicios', JSON.stringify(servicios));
-  }
+  await inicializarDatos();
+  renderizarSalones();
   renderizarServicios();
+});
+async function inicializarDatos() {
+  await cargarSiNoExiste("salones", "salones.json");
+  await cargarSiNoExiste("servicios", "servicios.json");
+  await cargarSiNoExiste("presupuestos", "presupuestos.json")
+  ;
 }
 
-function guardarServicios() {
-  localStorage.setItem('servicios', JSON.stringify(servicios));
+async function cargarSiNoExiste(clave, archivo) {
+  if (!localStorage.getItem(clave)) {
+    try {
+      const res = await fetch(`../data/${archivo}`);
+      const datos = await res.json();
+      localStorage.setItem(clave, JSON.stringify(datos));
+    } catch (e) {
+      console.error(`Error al cargar ${archivo}:`, e);
+    }
+  }
 }
 
-function renderizarServicios() {
-  const tbody = document.getElementById('tabla-servicios');
-  tbody.innerHTML = '';
-  servicios.forEach((servicio) => {
-    const estadoClass = servicio.estado === 'activo' ? 'text-success' : 'text-danger';
-    tbody.innerHTML += `
+function guardarEnLS(clave, datos) {
+  localStorage.setItem(clave, JSON.stringify(datos));
+}
+
+function renderizarSalones() {
+  const salones = JSON.parse(localStorage.getItem("salones")) || [];
+  const tabla = document.getElementById("tabla-salones");
+  tabla.innerHTML = "";
+
+  salones.forEach((salon) => {
+    tabla.innerHTML += `
       <tr>
-        <td>${servicio.nombre}</td>
-        <td>${servicio.descripcion}</td>
-        <td>${servicio.valor}</td>
-        <td class="${estadoClass}">${servicio.estado.charAt(0).toUpperCase() + servicio.estado.slice(1)}</td>
+        <td>${salon.titulo}</td>
+        <td>${salon.direccion}</td>
+        <td>${salon.descripcion}</td>
+        <td>$${salon.valor}</td>
+        <td class="${salon.estado === "Disponible" ? "text-success" : "text-danger"}">${salon.estado}</td>
         <td>
-          <button class="btn btn-warning btn-sm" onclick="editarServicio(${servicio.id})">Editar</button>
-          <button class="btn btn-danger btn-sm" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
+      <td>
+  <img src="${salon.imagen1}" alt="${salon.titulo} img1" style="width: 60px; height: auto; margin-right: 5px;" />
+  <img src="${salon.imagen2}" alt="${salon.titulo} img2" style="width: 60px; height: auto; margin-right: 5px;" />
+  <img src="${salon.imagen3}" alt="${salon.titulo} img3" style="width: 60px; height: auto; margin-right: 5px;" />
+  <img src="${salon.imagen4}" alt="${salon.titulo} img4" style="width: 60px; height: auto;" />
+</td>
+
+    </td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editarSalonAccion(${salon.id})">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarSalonAccion(${salon.id})">Eliminar</button>
         </td>
       </tr>
     `;
   });
 }
 
-
-document.getElementById('formServicio').addEventListener('submit', function(e) {
+document.getElementById("formSalon").addEventListener("submit", function (e) {
   e.preventDefault();
-  const nombre = document.getElementById('nombreServicio').value;
-  const descripcion = document.getElementById('descripcionServicio').value;
-  const valor = document.getElementById('valorServicio').value;
-  const estado = document.getElementById('estadoServicio').value;
+  const salones = JSON.parse(localStorage.getItem("salones")) || [];
+
+  const nuevo = {
+    id: Date.now(),
+    titulo: document.getElementById("nombre").value.trim(),
+    direccion: document.getElementById("direccion").value.trim(),
+    descripcion: document.getElementById("descripcion").value.trim(),
+    valor: parseFloat(document.getElementById("valor").value),
+    estado: document.getElementById("estado").value
+  };
+
+  if (!nuevo.titulo || !nuevo.direccion || !nuevo.descripcion || isNaN(nuevo.valor)) {
+    alert("Completá todos los campos obligatorios.");
+    return;
+  }
+
+  salones.push(nuevo);
+  guardarEnLS("salones", salones);
+  renderizarSalones();
+  this.reset();
+});
+
+window.eliminarSalonAccion = (id) => eliminarSalon(id, renderizarSalones);
+window.editarSalonAccion = (id) => editarSalon(id, renderizarSalones);
+
+function renderizarServicios() {
+  const servicios = JSON.parse(localStorage.getItem("servicios")) || [];
+  const tabla = document.getElementById("tabla-servicios");
+  tabla.innerHTML = "";
+
+  servicios.forEach((s) => {
+    tabla.innerHTML += `
+      <tr>
+        <td>${s.nombre}</td>
+        <td>${s.descripcion}</td>
+        <td>$${s.valor}</td>
+        <td class="${s.estado === "activo" ? "text-success" : "text-danger"}">${s.estado}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editarServicioAccion(${s.id})">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarServicioAccion(${s.id})">Eliminar</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+let editandoServicioId = null;
+
+document.getElementById("formServicio").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const servicios = JSON.parse(localStorage.getItem("servicios")) || [];
+
+  const nuevo = {
+    id: editandoServicioId || Date.now(),
+    nombre: document.getElementById("nombreServicio").value,
+    descripcion: document.getElementById("descripcionServicio").value,
+    valor: parseFloat(document.getElementById("valorServicio").value),
+    estado: document.getElementById("estadoServicio").value
+  };
+
+  if (!nuevo.nombre || !nuevo.descripcion || isNaN(nuevo.valor)) {
+    alert("Completá todos los campos.");
+    return;
+  }
 
   if (editandoServicioId) {
-    
-    const servicio = servicios.find(s => s.id === editandoServicioId);
-    servicio.nombre = nombre;
-    servicio.descripcion = descripcion;
-    servicio.valor = valor;
-    servicio.estado = estado;
+    const i = servicios.findIndex(s => s.id === editandoServicioId);
+    servicios[i] = nuevo;
     editandoServicioId = null;
-    document.getElementById('btnServicio').textContent = "Agregar servicio";
+    document.getElementById("btnServicio").textContent = "Agregar servicio";
   } else {
-    
-    const nuevoServicio = {
-      id: Date.now(),
-      nombre,
-      descripcion,
-      valor,
-      estado
-    };
-    servicios.push(nuevoServicio);
+    servicios.push(nuevo);
   }
-  guardarServicios();
+
+  guardarEnLS("servicios", servicios);
   renderizarServicios();
   this.reset();
 });
 
+window.editarServicioAccion = (id) => editarServicio(id, renderizarServicios);
+window.eliminarServicioAccion = (id) => eliminarServicio(id, renderizarServicios);
 
-window.eliminarServicio = function(id) {
-  if (confirm("¿Seguro que deseas eliminar este servicio?")) {
-    servicios = servicios.filter(s => s.id !== id);
-    guardarServicios();
-    renderizarServicios();
-  }
-};
-
-
-window.editarServicio = function(id) {
-  const servicio = servicios.find(s => s.id === id);
-  if (!servicio) return;
-  document.getElementById('nombreServicio').value = servicio.nombre;
-  document.getElementById('descripcionServicio').value = servicio.descripcion;
-  document.getElementById('valorServicio').value = servicio.valor;
-  document.getElementById('estadoServicio').value = servicio.estado;
-  editandoServicioId = id;
-  document.getElementById('btnServicio').textContent = "Guardar cambios";
-};
-
-document.addEventListener('DOMContentLoaded', cargarServicios);
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  sessionStorage.clear();
+  window.location.href = "../login.html";
+});

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Animador",
+    "descripcion": "Animación con juegos y música.",
+    "valor": 5000
+  },
+  {
+    "id": 2,
+    "nombre": "Catering",
+    "descripcion": "Servicio completo de comidas y bebidas.",
+    "valor": 50000
+  },
+  {
+  "id": 3,
+  "nombre": "Stand de Glitter",
+  "descripcion": "Tatuajes temporales y maquillaje con glitter para que los chicos brillen en su fiesta.",
+  "valor": 5000
+},
+{
+  "id": 4,
+  "nombre": "Servicio de fotografía profesional",
+  "descripcion": "Registrá todos los momentos especiales de la fiesta .",
+  "valor": 7000
+}
+]

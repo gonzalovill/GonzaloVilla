@@ -1,32 +1,57 @@
-export function eliminarSalon(id, salones, guardar, render) {
+export function eliminarSalon(id, renderTabla) {
+  let salones = JSON.parse(localStorage.getItem('salones')) || [];
   if (confirm("¿Estás seguro de eliminar este salón?")) {
     const nuevosSalones = salones.filter(s => s.id !== id);
-    guardar(nuevosSalones);
-    render(nuevosSalones);
+    localStorage.setItem("salones", JSON.stringify(nuevosSalones));
+    renderTabla();
   }
 }
 
-export function editarSalon(id, salones, guardarEnLocalStorage, renderTabla) {
+export function editarSalon(id, renderTabla) {
+  const salones = JSON.parse(localStorage.getItem("salones")) || [];
   const salon = salones.find(s => s.id === id);
   if (!salon) return;
 
-  const nuevoNombre = prompt("Editar nombre:", salon.nombre) || salon.nombre;
+  const nuevoTitulo = prompt("Editar título:", salon.titulo) || salon.titulo;
   const nuevaDireccion = prompt("Editar dirección:", salon.direccion) || salon.direccion;
   const nuevaDescripcion = prompt("Editar descripción:", salon.descripcion) || salon.descripcion;
+  const nuevoValor = prompt("Editar valor:", salon.valor) || salon.valor;
+  const nuevoEstado = prompt("Editar estado (Disponible o Reservado):", salon.estado) || salon.estado;
 
-  const nuevasImagenes = [];
-  for (let i = 0; i < 4; i++) {
-    const urlActual = salon.imagenes[i] || "";
-    const nuevaURL = prompt(`Editar imagen ${i + 1}:`, urlActual);
-    if (nuevaURL && nuevaURL.trim() !== "") {
-      nuevasImagenes.push(nuevaURL.trim());
-    }
-  }
-  salon.nombre = nuevoNombre;
+  salon.titulo = nuevoTitulo;
   salon.direccion = nuevaDireccion;
   salon.descripcion = nuevaDescripcion;
-  salon.imagenes = nuevasImagenes;
+  salon.valor = parseFloat(nuevoValor);
+  salon.estado = nuevoEstado;
 
-  guardarEnLocalStorage(salones);
+  localStorage.setItem("salones", JSON.stringify(salones));
   renderTabla();
+}
+
+export function editarServicio(id, render) {
+  const servicios = JSON.parse(localStorage.getItem("servicios")) || [];
+  const servicio = servicios.find(s => s.id === id);
+  if (!servicio) return;
+
+  const nuevoNombre = prompt("Editar nombre:", servicio.nombre) || servicio.nombre;
+  const nuevaDescripcion = prompt("Editar descripción:", servicio.descripcion) || servicio.descripcion;
+  const nuevoValor = prompt("Editar valor:", servicio.valor) || servicio.valor;
+  const nuevoEstado = prompt("Editar estado (activo/inactivo):", servicio.estado) || servicio.estado;
+
+  servicio.nombre = nuevoNombre;
+  servicio.descripcion = nuevaDescripcion;
+  servicio.valor = parseFloat(nuevoValor);
+  servicio.estado = nuevoEstado;
+
+  localStorage.setItem("servicios", JSON.stringify(servicios));
+  render();
+}
+
+export function eliminarServicio(id, render) {
+  let servicios = JSON.parse(localStorage.getItem("servicios")) || [];
+  if (confirm("¿Estás seguro de eliminar este servicio?")) {
+    servicios = servicios.filter(s => s.id !== id);
+    localStorage.setItem("servicios", JSON.stringify(servicios));
+    render();
+  }
 }
