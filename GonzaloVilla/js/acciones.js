@@ -36,12 +36,11 @@ export function editarServicio(id, render) {
   const nuevoNombre = prompt("Editar nombre:", servicio.nombre) || servicio.nombre;
   const nuevaDescripcion = prompt("Editar descripción:", servicio.descripcion) || servicio.descripcion;
   const nuevoValor = prompt("Editar valor:", servicio.valor) || servicio.valor;
-  const nuevoEstado = prompt("Editar estado (activo/inactivo):", servicio.estado) || servicio.estado;
-
+  
   servicio.nombre = nuevoNombre;
   servicio.descripcion = nuevaDescripcion;
   servicio.valor = parseFloat(nuevoValor);
-  servicio.estado = nuevoEstado;
+
 
   localStorage.setItem("servicios", JSON.stringify(servicios));
   render();

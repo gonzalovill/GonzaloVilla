@@ -14,15 +14,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  await inicializarDatos();
+  await cargadeDatos();
   renderizarSalones();
   renderizarServicios();
 });
-async function inicializarDatos() {
+async function cargadeDatos() {
   await cargarSiNoExiste("salones", "salones.json");
   await cargarSiNoExiste("servicios", "servicios.json");
-  await cargarSiNoExiste("presupuestos", "presupuestos.json")
-  ;
+  await cargarSiNoExiste("presupuestos", "presupuestos.json");
+  await cargarSiNoExiste("imagenes", "imagenes.json");
+
 }
 
 async function cargarSiNoExiste(clave, archivo) {
@@ -43,10 +44,17 @@ function guardarEnLS(clave, datos) {
 
 function renderizarSalones() {
   const salones = JSON.parse(localStorage.getItem("salones")) || [];
+  const imagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
   const tabla = document.getElementById("tabla-salones");
   tabla.innerHTML = "";
 
   salones.forEach((salon) => {
+    const imagenesSalon = imagenes.filter(img => img.idSalon === salon.id);
+
+    const htmlImagenes = imagenesSalon.map(img => 
+      `<img src="../${img.rutaArchivo}" alt="Imagen de ${salon.titulo}" style="width: 60px; height: auto; margin-right: 5px;" />`
+    ).join("");
+
     tabla.innerHTML += `
       <tr>
         <td>${salon.titulo}</td>
@@ -54,15 +62,7 @@ function renderizarSalones() {
         <td>${salon.descripcion}</td>
         <td>$${salon.valor}</td>
         <td class="${salon.estado === "Disponible" ? "text-success" : "text-danger"}">${salon.estado}</td>
-        <td>
-      <td>
-  <img src="${salon.imagen1}" alt="${salon.titulo} img1" style="width: 60px; height: auto; margin-right: 5px;" />
-  <img src="${salon.imagen2}" alt="${salon.titulo} img2" style="width: 60px; height: auto; margin-right: 5px;" />
-  <img src="${salon.imagen3}" alt="${salon.titulo} img3" style="width: 60px; height: auto; margin-right: 5px;" />
-  <img src="${salon.imagen4}" alt="${salon.titulo} img4" style="width: 60px; height: auto;" />
-</td>
-
-    </td>
+        <td>${htmlImagenes}</td>
         <td>
           <button class="btn btn-warning btn-sm" onclick="editarSalonAccion(${salon.id})">Editar</button>
           <button class="btn btn-danger btn-sm" onclick="eliminarSalonAccion(${salon.id})">Eliminar</button>
@@ -71,6 +71,8 @@ function renderizarSalones() {
     `;
   });
 }
+
+
 
 document.getElementById("formSalon").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -110,7 +112,6 @@ function renderizarServicios() {
         <td>${s.nombre}</td>
         <td>${s.descripcion}</td>
         <td>$${s.valor}</td>
-        <td class="${s.estado === "activo" ? "text-success" : "text-danger"}">${s.estado}</td>
         <td>
           <button class="btn btn-warning btn-sm" onclick="editarServicioAccion(${s.id})">Editar</button>
           <button class="btn btn-danger btn-sm" onclick="eliminarServicioAccion(${s.id})">Eliminar</button>
@@ -120,19 +121,12 @@ function renderizarServicios() {
   });
 }
 
+
 let editandoServicioId = null;
 
 document.getElementById("formServicio").addEventListener("submit", function (e) {
   e.preventDefault();
   const servicios = JSON.parse(localStorage.getItem("servicios")) || [];
-
-  const nuevo = {
-    id: editandoServicioId || Date.now(),
-    nombre: document.getElementById("nombreServicio").value,
-    descripcion: document.getElementById("descripcionServicio").value,
-    valor: parseFloat(document.getElementById("valorServicio").value),
-    estado: document.getElementById("estadoServicio").value
-  };
 
   if (!nuevo.nombre || !nuevo.descripcion || isNaN(nuevo.valor)) {
     alert("Completá todos los campos.");
