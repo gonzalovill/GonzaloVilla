@@ -128,7 +128,7 @@ function renderizarServicios() {
   });
 }
 
-// Agrega o edita servicio
+
 document.getElementById('formServicio').addEventListener('submit', function(e) {
   e.preventDefault();
   const nombre = document.getElementById('nombreServicio').value;
@@ -137,7 +137,7 @@ document.getElementById('formServicio').addEventListener('submit', function(e) {
   const estado = document.getElementById('estadoServicio').value;
 
   if (editandoServicioId) {
-    // Edita
+    
     const servicio = servicios.find(s => s.id === editandoServicioId);
     servicio.nombre = nombre;
     servicio.descripcion = descripcion;
@@ -146,7 +146,7 @@ document.getElementById('formServicio').addEventListener('submit', function(e) {
     editandoServicioId = null;
     document.getElementById('btnServicio').textContent = "Agregar servicio";
   } else {
-    // Agrega
+    
     const nuevoServicio = {
       id: Date.now(),
       nombre,
@@ -161,7 +161,7 @@ document.getElementById('formServicio').addEventListener('submit', function(e) {
   this.reset();
 });
 
-// Elimina servicio
+
 window.eliminarServicio = function(id) {
   if (confirm("¿Seguro que deseas eliminar este servicio?")) {
     servicios = servicios.filter(s => s.id !== id);
@@ -170,7 +170,7 @@ window.eliminarServicio = function(id) {
   }
 };
 
-// Editar servicio
+
 window.editarServicio = function(id) {
   const servicio = servicios.find(s => s.id === id);
   if (!servicio) return;

@@ -55,3 +55,55 @@ export function inicializarSalones() {
     localStorage.setItem("salones", JSON.stringify(salonesIniciales));
   }
 }
+
+
+
+export async function mostrarServiciosEnIndex() {
+  try {
+    const res = await fetch('data/servicios.json');
+    const servicios = await res.json();
+    
+    const destacados = servicios.filter(s => s.estado === 'activo').slice(0, 3);
+    const contenedor = document.getElementById('servicios-index');
+    destacados.forEach(servicio => {
+      contenedor.innerHTML += `
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">${servicio.nombre}</h5>
+              <p class="card-text">${servicio.descripcion}</p>
+              <p class="mb-1"><strong>Valor:</strong> $${servicio.valor}</p>
+              <span class="text-success fw-bold">Disponible</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  } catch (e) {
+    
+  }
+}
+
+export function inicializarServicios() {
+  const serviciosExistentes = localStorage.getItem("servicios");
+
+  if (!serviciosExistentes) {
+    const serviciosIniciales = [
+      {
+        id: 1,
+        nombre: "Animador",
+        descripcion: "Animación con juegos y música.",
+        valor: 1500,
+        estado: "activo"
+      },
+      {
+        id: 2,
+        nombre: "Catering",
+        descripcion: "Servicio completo de comidas y bebidas.",
+        valor: 3500,
+        estado: "activo"
+      }
+    ];
+    localStorage.setItem("servicios", JSON.stringify(serviciosIniciales));
+  }
+}
