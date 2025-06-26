@@ -135,15 +135,6 @@ document.getElementById("formSalon").addEventListener("submit", function (e) {
     alert("❌ Ocurrió un error al guardar el salón. Verificá los datos e intentá de nuevo.");
   }
 });
-
-
-  salones.push(nuevo);
-  guardarEnLocalStorage("salones", salones);
-  guardarEnLocalStorage("imagenes", imagenes.concat(nuevasImagenes));
-  renderizarSalones();
-  this.reset();
-});
-
 window.eliminarSalonAccion = (id) => eliminarSalon(id, renderizarSalones);
 window.editarSalonAccion = (id) => editarSalon(id, renderizarSalones);
 
