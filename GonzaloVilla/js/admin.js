@@ -105,7 +105,7 @@ document.getElementById("formSalon").addEventListener("submit", function (e) {
     return;
   }
   const nuevasImagenes = [];
-    for (let i = 1; i <= 4; i++) { // asumimos 4 fotos por salón
+    for (let i = 1; i <= 4; i++) { 
       nuevasImagenes.push({
         idSalon: nuevoId,
         rutaArchivo: `img/salones/salon${nuevoId}/s${nuevoId}foto${i}.jpg`
