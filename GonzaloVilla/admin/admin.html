@@ -11,14 +11,15 @@
 <body class="bg-info">
   <div class="container my-5">
     <h1 class="text-center mb-4 text-white">Administrar Salones</h1>
-     <a href="../index.html" class="btn btn-secondary">
-   <i class="bi bi-arrow-left"></i> Volver al inicio
-   </a>
+    <a href="../index.html" class="btn btn-secondary">
+      <i class="bi bi-arrow-left"></i> Volver al inicio
+    </a>
     <div class="d-flex justify-content-end p-3">
       <a href="usuarios.html" class="btn btn-outline-primary">Usuarios</a>
       <button id="logoutBtn" class="btn btn-outline-danger">Cerrar sesión</button>
     </div>
 
+    <!-- Formulario Agregar nuevo salón sin required -->
     <div class="card p-4 mb-4 x">
       <h3>Agregar nuevo salón</h3>
       <form id="formSalon">
@@ -29,7 +30,7 @@
         </div>
         <div class="mb-3">
           <label for="direccion" class="form-label"><strong>Dirección</strong></label>
-          <input type="text" class="form-control" id="direccion" required />
+          <input type="text" class="form-control" id="direccion" />
           <small class="form-text text-muted">Ejemplo: Champagnat 1090</small>
         </div>
         <div class="mb-3">
@@ -40,12 +41,10 @@
             las edades en un ambiente cerrado y cómodo.
           </small>
         </div>
-
         <div class="mb-3">
           <label for="valor" class="form-label"><strong>Valor</strong></label>
           <input type="number" class="form-control" id="valor" />
         </div>
-
         <div class="mb-3">
           <label for="estado" class="form-label"><strong>Estado</strong></label>
           <select class="form-control" id="estado">
@@ -53,7 +52,6 @@
             <option value="Reservado">Reservado</option>
           </select>
         </div>
-
         <div class="mb-3">
           <label>Imagen 1</label>
           <input type="text" id="imagen1" class="form-control mb-2" placeholder="URL de imagen 1" />
@@ -72,12 +70,12 @@
           <small class="text-muted d-block">Ejemplo: img/salones/salon4/s4foto4.jpeg</small>
         </div>
         <div class="d-flex gap-2 mt-3">
-    <button type="submit" class="btn btn-success">Agregar salón</button>
-   
-  </div>
-        </form>
+          <button type="submit" class="btn btn-success">Agregar salón</button>
+        </div>
+      </form>
     </div>
 
+    <!-- Tabla salones -->
     <table class="table table-bordered table-ligth mb-4">
       <thead>
         <tr>
@@ -93,7 +91,7 @@
       <tbody id="tabla-salones"></tbody>
     </table>
 
-   
+    <!-- Administrar Servicios -->
     <div class="card p-4 mb-4">
       <h3>Administrar Servicios</h3>
       <form id="formServicio">
@@ -110,13 +108,13 @@
           <label for="valorServicio" class="form-label"><strong>Valor</strong></label>
           <input type="number" class="form-control" id="valorServicio" required />
         </div>
-        <div class="mb-3">
-        </div>
-        <button type="submit" class=" btn btn-success" id="btnServicio">Agregar servicio</button>
+        <div class="mb-3"></div>
+        <button type="submit" class="btn btn-success" id="btnServicio">Agregar servicio</button>
       </form>
     </div>
 
-   table class="table table-bordered table-ligth mb-4">
+    <!-- Tabla servicios -->
+    <table class="table table-bordered table-ligth mb-4">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -150,9 +148,6 @@
 </body>
 
 </html>
-
-
-
 
 
 
