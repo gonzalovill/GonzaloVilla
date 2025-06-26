@@ -59,11 +59,19 @@ function renderizarSalones() {
   tabla.innerHTML = "";
 
   salones.forEach((salon) => {
-    const imagenesSalon = imagenes.filter(img => img.idSalon === salon.id);
+    const imagenesSalon = imagenes
+  .filter(img => img.idSalon === salon.id)
+  .filter((img, index, self) =>
+    index === self.findIndex(t => t.rutaArchivo === img.rutaArchivo)
+  );
 
-    const htmlImagenes = imagenesSalon.map(img => 
-      `<img src="../${img.rutaArchivo}" alt="Imagen de ${salon.titulo}" style="width: 60px; height: auto; margin-right: 5px;" />`
-    ).join("");
+
+    const htmlImagenes = imagenesSalon.map(img => {
+  const ruta = img.rutaArchivo?.trim();
+  if (!ruta) return "";
+  return `<img src="../${ruta}" alt="" style="width: 60px; height: auto; margin-right: 5px;" onerror="this.style.display='none'" />`;
+}).join("");
+
 
     tabla.innerHTML += `
       <tr>
@@ -105,12 +113,18 @@ document.getElementById("formSalon").addEventListener("submit", function (e) {
     return;
   }
   const nuevasImagenes = [];
-    for (let i = 1; i <= 4; i++) { 
-      nuevasImagenes.push({
-        idSalon: nuevoId,
-        rutaArchivo: `img/salones/salon${nuevoId}/s${nuevoId}foto${i}.jpg`
-      });
-    }
+    for (let i = 1; i <= 4; i++) {
+  const input = document.getElementById(`imagen${i}`);
+  const ruta = input.value.trim();
+
+  if (ruta) {
+    nuevasImagenes.push({
+      idSalon: nuevoId,
+      rutaArchivo: ruta
+    });
+  }
+}
+
   salones.push(nuevo);
   guardarEnLocalStorage("salones", salones);
   guardarEnLocalStorage("imagenes", imagenes.concat(nuevasImagenes));
