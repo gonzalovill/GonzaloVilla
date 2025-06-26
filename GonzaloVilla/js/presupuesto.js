@@ -97,18 +97,22 @@ form.addEventListener("submit", (e) => {
   const valorSalon = Number(salon.valor);
   const valorTotal = valorSalon + valorServicios;
 
-  const presupuesto = {
-    id: Date.now(),
-    nombre,
-    fecha,
-    tema: "No definido",
-    valorTotal,
-    servicios: serviciosSeleccionados.map(s => ({
-      id: s.id,
-      nombre: s.nombre,
-      descripcion: s.descripcion
-    }))
-  };
+const presupuesto = {
+  id: Date.now(),
+  nombre,
+  fecha,
+  tema: "No definido",
+  valorTotal,
+  salon: {
+    id: salon.id,
+    titulo: salon.titulo
+  },
+  servicios: serviciosSeleccionados.map(s => ({
+    id: s.id,
+    nombre: s.nombre,
+    descripcion: s.descripcion
+  }))
+};
 
   guardarPresupuesto(presupuesto);
 
@@ -139,3 +143,51 @@ form.addEventListener("submit", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", cargarDatos);
+
+
+
+
+function cargarPresupuestos() {
+  const tabla = document.getElementById("tabla-presupuestos");
+  const presupuestos = JSON.parse(localStorage.getItem("presupuestos")) || [];
+  tabla.innerHTML = "";
+
+  presupuestos.forEach(p => {
+    const serviciosTexto = p.servicios.map(s => s.nombre).join(", ");
+
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${p.nombre}</td>
+      <td>${p.fecha}</td>
+      <td>${p.salon?.titulo || "No definido"}</td>
+      <td>${serviciosTexto}</td>
+      <td>$${p.valorTotal}</td>
+      <td>
+        <button class="btn btn-danger btn-sm eliminar" data-id="${p.id}">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </td>
+    `;
+    tabla.appendChild(fila);
+  });
+
+  
+  document.querySelectorAll(".eliminar").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const id = Number(e.currentTarget.dataset.id);
+      eliminarPresupuesto(id);
+    });
+  });
+}
+
+function eliminarPresupuesto(id) {
+  if (!confirm("¿Seguro que querés eliminar este presupuesto?")) return;
+
+  let presupuestos = JSON.parse(localStorage.getItem("presupuestos")) || [];
+  presupuestos = presupuestos.filter(p => p.id !== id);
+  localStorage.setItem("presupuestos", JSON.stringify(presupuestos));
+
+  cargarPresupuestos(); 
+}
+
+document.addEventListener("DOMContentLoaded", cargarPresupuestos);

@@ -180,3 +180,59 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   sessionStorage.clear();
   window.location.href = "../login.html";
 });
+
+
+
+
+
+
+
+
+
+function cargarPresupuestos() {
+  const tabla = document.getElementById("tabla-presupuestos");
+  const presupuestos = JSON.parse(localStorage.getItem("presupuestos")) || [];
+  tabla.innerHTML = "";
+
+  presupuestos.forEach(p => {
+    const serviciosTexto = p.servicios.map(s => s.nombre).join(", ");
+
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${p.nombre}</td>
+      <td>${p.fecha}</td>
+      <td>${p.salon?.titulo || "No definido"}</td>
+      <td>${serviciosTexto}</td>
+      <td>$${p.valorTotal}</td>
+      <td>
+        <button class="btn btn-danger btn-sm eliminar" data-id="${p.id}">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </td>
+    `;
+    tabla.appendChild(fila);
+  });
+
+  
+  document.querySelectorAll(".eliminar").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const id = Number(e.currentTarget.dataset.id);
+      eliminarPresupuesto(id);
+    });
+  });
+}
+
+function eliminarPresupuesto(id) {
+  if (!confirm("¿Seguro que querés eliminar este presupuesto?")) return;
+
+  let presupuestos = JSON.parse(localStorage.getItem("presupuestos")) || [];
+  presupuestos = presupuestos.filter(p => p.id !== id);
+  localStorage.setItem("presupuestos", JSON.stringify(presupuestos));
+
+  cargarPresupuestos(); 
+}
+
+document.addEventListener("DOMContentLoaded", cargarPresupuestos);
+
+
+
