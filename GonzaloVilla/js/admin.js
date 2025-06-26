@@ -94,36 +94,48 @@ function renderizarSalones() {
 
 document.getElementById("formSalon").addEventListener("submit", function (e) {
   e.preventDefault();
-  const salones = JSON.parse(localStorage.getItem("salones")) || [];
-   const imagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
 
-  const nuevoId = salones.length > 0 ? Math.max(...salones.map(s => s.id)) + 1 : 1;
+  try {
+    const salones = JSON.parse(localStorage.getItem("salones")) || [];
+    const imagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
 
-  const nuevo = {
-    id: nuevoId,
-    titulo: document.getElementById("titulo").value.trim(),
-    direccion: document.getElementById("direccion").value.trim(),
-    descripcion: document.getElementById("descripcion").value.trim(),
-    valor: parseFloat(document.getElementById("valor").value),
-    estado: document.getElementById("estado").value
-  };
+    const nuevoId = salones.length > 0 ? Math.max(...salones.map(s => s.id)) + 1 : 1;
 
-  if (!nuevo.titulo || !nuevo.direccion || !nuevo.descripcion || isNaN(nuevo.valor)) {
-    alert("Completá todos los campos obligatorios.");
-    return;
-  }
-  const nuevasImagenes = [];
+    const nuevo = {
+      id: nuevoId,
+      titulo: document.getElementById("titulo").value.trim(),
+      direccion: document.getElementById("direccion").value.trim(),
+      descripcion: document.getElementById("descripcion").value.trim(),
+      valor: parseFloat(document.getElementById("valor").value),
+      estado: document.getElementById("estado").value
+    };
+
+    if (!nuevo.titulo || !nuevo.direccion || !nuevo.descripcion || isNaN(nuevo.valor)) {
+      alert("⚠️ Completá todos los campos obligatorios.");
+      return;
+    }
+
+    const nuevasImagenes = [];
     for (let i = 1; i <= 4; i++) {
-  const input = document.getElementById(`imagen${i}`);
-  const ruta = input.value.trim();
+      nuevasImagenes.push({
+        idSalon: nuevoId,
+        rutaArchivo: `img/salones/salon${nuevoId}/s${nuevoId}foto${i}.jpg`
+      });
+    }
 
-  if (ruta) {
-    nuevasImagenes.push({
-      idSalon: nuevoId,
-      rutaArchivo: ruta
-    });
+    salones.push(nuevo);
+    guardarEnLocalStorage("salones", salones);
+    guardarEnLocalStorage("imagenes", imagenes.concat(nuevasImagenes));
+
+    renderizarSalones();
+    this.reset();
+    alert("✅ Salón guardado correctamente.");
+  } catch (error) {
+    console.error("❌ Error al guardar el salón:", error);
+    alert("❌ Ocurrió un error al guardar el salón. Verificá los datos e intentá de nuevo.");
   }
-}
+});
+
 
   salones.push(nuevo);
   guardarEnLocalStorage("salones", salones);
