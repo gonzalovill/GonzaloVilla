@@ -24,7 +24,7 @@
       <form id="formSalon">
         <div class="mb-3">
           <label for="titulo" class="form-label"><strong>Nombre</strong></label>
-          <input type="text" class="form-control" id="titulo" required />
+          <input type="text" class="form-control" id="titulo" />
           <small class="form-text text-muted">Ejemplo: RECREO</small>
         </div>
         <div class="mb-3">
@@ -34,7 +34,7 @@
         </div>
         <div class="mb-3">
           <label for="descripcion" class="form-label"><strong>Descripción</strong></label>
-          <textarea class="form-control" id="descripcion" rows="2" required></textarea>
+          <textarea class="form-control" id="descripcion" rows="2"></textarea>
           <small class="form-text text-muted">
             Ejemplo: Diversión asegurada bajo techo. Recreo ofrece un gran pelotero, inflables y juegos para todas
             las edades en un ambiente cerrado y cómodo.
@@ -43,12 +43,12 @@
 
         <div class="mb-3">
           <label for="valor" class="form-label"><strong>Valor</strong></label>
-          <input type="number" class="form-control" id="valor" required />
+          <input type="number" class="form-control" id="valor" />
         </div>
 
         <div class="mb-3">
           <label for="estado" class="form-label"><strong>Estado</strong></label>
-          <select class="form-control" id="estado" required>
+          <select class="form-control" id="estado">
             <option value="Disponible">Disponible</option>
             <option value="Reservado">Reservado</option>
           </select>
@@ -116,7 +116,7 @@
       </form>
     </div>
 
-    <table class="table table-bordered table-ligth mb-4">
+   table class="table table-bordered table-ligth mb-4">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -127,34 +127,32 @@
       </thead>
       <tbody id="tabla-servicios"></tbody>
     </table>
+
+    <!-- Tabla presupuestos -->
+    <h3 class="text-border text-light">Presupuestos realizados</h3>
+    <table class="table table-bordered table-info mb-4">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Fecha Evento</th>
+          <th>Salón</th>
+          <th>Servicios</th>
+          <th>Valor Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-presupuestos"></tbody>
+    </table>
+
   </div>
 
-
-
-<script type="module" src="../js/admin.js"></script>
+  <script type="module" src="../js/admin.js"></script>
 </body>
 
-</html> 
+</html>
 
 
 
-
-<div class="container my-5">
-  <h3 class="text-border text-light">Presupuestos realizados</h3>
-<table class="table table-bordered table-info mb-4">
-  <thead>
-    <tr>
-      <th>Cliente</th>
-      <th>Fecha Evento</th>
-      <th>Salón</th>
-      <th>Servicios</th>
-      <th>Valor Total
-      <th>Acciones</th>
-      </th>
-    </tr>
-  </thead>
-  <tbody id="tabla-presupuestos"></tbody>
-</table>
 
 
 
