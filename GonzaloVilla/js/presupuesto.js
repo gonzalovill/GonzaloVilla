@@ -102,11 +102,12 @@ form.addEventListener("submit", (e) => {
     nombre,
     fecha,
     tema: "No definido",
+    idSalon,   
     valorTotal,
     servicios: serviciosSeleccionados.map(s => ({
-      id: s.id,
-      nombre: s.nombre,
-      descripcion: s.descripcion
+    id: s.id,
+    nombre: s.nombre,
+    descripcion: s.descripcion
     }))
   };
 
