@@ -173,6 +173,41 @@ document.getElementById("formServicio").addEventListener("submit", function (e) 
   this.reset();
 });
 
+async function mostrarPresupuestos() {
+  try {
+    const presupuestos = JSON.parse(localStorage.getItem("presupuestos")) || [];
+
+    const [salonesRes, serviciosRes] = await Promise.all([
+      fetch('../data/salones.json'),
+      fetch('../data/servicios.json')
+    ]);
+
+    const salones = await salonesRes.json();
+    const servicios = await serviciosRes.json();
+
+    const tbody = document.querySelector("#tablaPresupuestos tbody");
+    tbody.innerHTML = "";
+
+    presupuestos.forEach(p => {
+      const salon = salones.find(s => Number(s.id) === Number(p.idSalon));
+      const nombresServicios = (p.servicios || []).map(s => s.nombre).join(", ");
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${p.nombre}</td>
+        <td>${p.fecha}</td>
+        <td>${salon ? salon.titulo : "Desconocido"}</td>
+        <td>${nombresServicios}</td>
+        <td>$${p.valorTotal}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+  } catch (error) {
+    console.error("Error cargando presupuestos:", error);
+  }
+}
+
 window.editarServicioAccion = (id) => editarServicio(id, renderizarServicios);
 window.eliminarServicioAccion = (id) => eliminarServicio(id, renderizarServicios);
 
