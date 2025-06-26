@@ -9,11 +9,23 @@ let presupuestos = [];
 
 async function cargarDatos() {
   try {
-    const resSalones = await fetch('./data/salones.json');
-    salones = await resSalones.json();
+    const salonesLS = localStorage.getItem("salones");
+if (salonesLS) {
+  salones = JSON.parse(salonesLS);
+} else {
+  const resSalones = await fetch('./data/salones.json');
+  salones = await resSalones.json();
+  localStorage.setItem("salones", JSON.stringify(salones));
+}
 
-    const resServicios = await fetch('./data/servicios.json');
-    servicios = await resServicios.json();
+const serviciosLS = localStorage.getItem("servicios");
+if (serviciosLS) {
+  servicios = JSON.parse(serviciosLS);
+} else {
+  const resServicios = await fetch('./data/servicios.json');
+  servicios = await resServicios.json();
+  localStorage.setItem("servicios", JSON.stringify(servicios));
+}
 
     const presupuestosLS = localStorage.getItem("presupuestos");
     if (presupuestosLS) {
