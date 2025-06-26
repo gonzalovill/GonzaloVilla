@@ -22,8 +22,18 @@ async function cargadeDatos() {
   await cargardatosSinohay("salones", "salones.json");
   await cargardatosSinohay("servicios", "servicios.json");
   await cargardatosSinohay("presupuestos", "presupuestos.json");
-  await cargardatosSinohay("imagenes", "imagenes.json");
+  const imagenesGuardadas = JSON.parse(localStorage.getItem("imagenes"));
 
+  if (!imagenesGuardadas || imagenesGuardadas.length === 0) {
+    try {
+      const res = await fetch("../data/imagenes.json");
+      const imagenesDesdeArchivo = await res.json();
+
+      localStorage.setItem("imagenes", JSON.stringify(imagenesDesdeArchivo));
+    } catch (e) {
+      console.error("Error cargando imagenes.json:", e);
+    }
+  }
 }
 
 async function cargardatosSinohay(clave, archivo) {
@@ -77,10 +87,13 @@ function renderizarSalones() {
 document.getElementById("formSalon").addEventListener("submit", function (e) {
   e.preventDefault();
   const salones = JSON.parse(localStorage.getItem("salones")) || [];
+   const imagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
+
+  const nuevoId = salones.length > 0 ? Math.max(...salones.map(s => s.id)) + 1 : 1;
 
   const nuevo = {
-    id: Date.now(),
-    titulo: document.getElementById("nombre").value.trim(),
+    id: nuevoId,
+    titulo: document.getElementById("titulo").value.trim(),
     direccion: document.getElementById("direccion").value.trim(),
     descripcion: document.getElementById("descripcion").value.trim(),
     valor: parseFloat(document.getElementById("valor").value),
@@ -91,9 +104,16 @@ document.getElementById("formSalon").addEventListener("submit", function (e) {
     alert("Completá todos los campos obligatorios.");
     return;
   }
-
+  const nuevasImagenes = [];
+    for (let i = 1; i <= 4; i++) { // asumimos 4 fotos por salón
+      nuevasImagenes.push({
+        idSalon: nuevoId,
+        rutaArchivo: `img/salones/salon${nuevoId}/s${nuevoId}foto${i}.jpg`
+      });
+    }
   salones.push(nuevo);
   guardarEnLocalStorage("salones", salones);
+  guardarEnLocalStorage("imagenes", imagenes.concat(nuevasImagenes));
   renderizarSalones();
   this.reset();
 });
