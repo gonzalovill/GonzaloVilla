@@ -33,8 +33,19 @@ function renderizarSalones(salones, imagenes) {
   const contenedor = document.getElementById("contenedor-catalogo");
   contenedor.innerHTML = "";
 
+  // Eliminar duplicados por clave idSalon-rutaArchivo
+  const unicas = [];
+  const claves = new Set();
+  for (const img of imagenes) {
+    const clave = `${img.idSalon}-${img.rutaArchivo}`;
+    if (!claves.has(clave)) {
+      claves.add(clave);
+      unicas.push(img);
+    }
+  }
+
   salones.forEach(salon => {
-    const imagenesSalon = imagenes.filter(img => img.idSalon === salon.id);
+    const imagenesSalon = unicas.filter(img => img.idSalon === salon.id);
 
     const estadoBadge = salon.estado === "Disponible"
       ? `<span class="badge bg-success">Disponible</span>`
@@ -49,9 +60,9 @@ function renderizarSalones(salones, imagenes) {
             style="width:100px; height:70px; object-fit:cover; border-radius:5px;">
         `).join("")
       : '<p class="text-muted">Sin imágenes disponibles</p>';
-     const boton = salon.estado === "Disponible"
-  ? `<a href="presupuesto.html?idSalon=${salon.id}" class="btn btn-primary mt-2">Solicitar presupuesto</a>`
-  : `<button class="btn btn-secondary mt-2" disabled>Reservado</button>`;
+    const boton = salon.estado === "Disponible"
+      ? `<a href="presupuesto.html?idSalon=${salon.id}" class="btn btn-primary mt-2">Solicitar presupuesto</a>`
+      : `<button class="btn btn-secondary mt-2" disabled>Reservado</button>`;
 
     contenedor.innerHTML += `
       <article class="card mb-4 p-3 shadow-sm">
@@ -61,13 +72,12 @@ function renderizarSalones(salones, imagenes) {
         <p><strong>Valor:</strong> $${salon.valor}</p>
         <p>${estadoBadge}</p>
         <div class="d-flex flex-wrap gap-2">${imagenesHTML}</div>
-         ${boton}
+        ${boton}
       </article>
-    
-
     `;
   });
 }
+
 
 window.abrirFormularioPresupuesto = (idSalon) => {
   document.getElementById("salonSeleccionado").value = idSalon;
