@@ -8,10 +8,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem("salones", JSON.stringify(salones));
     }
 
-    const imagenesRes = await fetch("data/imagenes.json");
-    const imagenes = await imagenesRes.json();
+    // Cargar y fusionar imágenes
+    const imagenesJSON = await fetch("data/imagenes.json").then(res => res.json());
+    const imagenesLocales = JSON.parse(localStorage.getItem("imagenes")) || [];
 
-    localStorage.setItem("imagenes", JSON.stringify(imagenes));
+    const rutasExistentes = new Set(imagenesLocales.map(img => img.rutaArchivo));
+    const imagenesFusionadas = [
+      ...imagenesLocales,
+      ...imagenesJSON.filter(img => !rutasExistentes.has(img.rutaArchivo))
+    ];
+
+    localStorage.setItem("imagenes", JSON.stringify(imagenesFusionadas));
+
+    renderizarSalones(salones, imagenesFusionadas);
 
     renderizarSalones(salones, imagenes);
   } catch (error) {
@@ -33,7 +42,11 @@ function renderizarSalones(salones, imagenes) {
 
     const imagenesHTML = imagenesSalon.length
       ? imagenesSalon.map(img => `
-          <img src="${img.rutaArchivo}" alt="Imagen de ${salon.titulo}" style="width:100px; height:70px; object-fit:cover; border-radius:5px;">
+          <img 
+            src="${img.rutaArchivo}" 
+            alt="Imagen de ${salon.titulo}" 
+            onerror="this.style.display='none'" 
+            style="width:100px; height:70px; object-fit:cover; border-radius:5px;">
         `).join("")
       : '<p class="text-muted">Sin imágenes disponibles</p>';
      const boton = salon.estado === "Disponible"
